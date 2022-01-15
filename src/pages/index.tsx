@@ -1,9 +1,10 @@
+import { useRoute } from '../../hooks/route';
 
 
 const Index = () => {
   return (
-    <div>
-      Hello from sulid-js
+    <div onClick={() => useRoute().navigate('/test')}>
+      Hello World!
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express-serve-static-core';
-import { renderToString, createComponent } from 'solid-js/web';
+import * as solid from 'solid-js/web';
 import { viteServer } from './index';
 import { pageLoader } from './pageLoader';
 
@@ -9,6 +9,9 @@ export const template = `
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
+    <script type="module" src="/server/entry.tsx" defer></script>
+    <!-- hydrant -->
+    <script>window.__PROPS__ = <!-- props --></script>
   </head>
   <body>
     <div id="app"><!-- page-html --></div>
@@ -19,9 +22,12 @@ export const template = `
 export const serverRenderRoute = (): RequestHandler => async (req, res) => {
   try {
     let { template, App, Page, props } = await pageLoader(req.originalUrl)
-    const pageHTML = renderToString(() => createComponent(App, { props, Page }))
+    const pageHTML = solid.renderToString(() => solid.createComponent(App, { props, Page }))
 
-    const html = template.replace('<!-- page-html -->', pageHTML);
+    const html = template
+      .replace('<!-- page-html -->', pageHTML)
+      .replace('<!-- props -->', JSON.stringify(props))
+      .replace('<!-- hydrant -->', solid.generateHydrationScript());
 
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
   } catch (e: any) {
