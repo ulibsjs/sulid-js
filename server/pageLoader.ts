@@ -1,5 +1,5 @@
-import { template as coreTemplate } from './teplate';
-import { viteServer } from './index';
+import { template as coreTemplate } from './template';
+import { viteServer } from './development';
 
 interface PageLoaderRes {
   template: string,
@@ -11,12 +11,18 @@ interface PageLoaderRes {
 export const pageLoader = async(url: string, params: Record<string, string>): Promise<PageLoaderRes> => {
   const template = await viteServer.transformIndexHtml(url, coreTemplate);
 
-  const [{ default: Page, getServerSideProps }, { App }] = await Promise.all([
+  const [
+    { default: Page, getServerSideProps, getStaticProps },
+    { App }
+  ] = await Promise.all([
     viteServer.ssrLoadModule(url),
     viteServer.ssrLoadModule('/server/entry.tsx')
   ])
 
-  const props = getServerSideProps ? await getServerSideProps({ params }) : {};
+  const props = {
+    ...getServerSideProps ? await getServerSideProps({ params }) : {},
+    ...getStaticProps ? await getStaticProps({ params }) : {},
+  };
 
   return { template, App, Page, props };
 }

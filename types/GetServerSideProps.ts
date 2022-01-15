@@ -1,6 +1,4 @@
-export interface PageContext {
-  params: Record<string, string>
-}
+import { PageContext } from './PageContext';
 
 type GetServerSideProps<Props=object> = (pageContext: PageContext) => Props;
 

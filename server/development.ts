@@ -53,7 +53,6 @@ createServer({
   app.use(viteServer.middlewares);
   app.use('/lib/*', setPropsData)
 
-  console.log(pathUrlPair);
   pathUrlPair.forEach(({ path, url }) => {
     app.get(url, async(req, res) => {
       try {
@@ -75,6 +74,6 @@ createServer({
   })
 
   app.listen(port, () => {
-    console.log(`App run on http://localhost:${port}`);
+    console.log(`Development server run on http://localhost:${port}`);
   })
 })

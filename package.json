@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Solid-js ssr framework similar to NextJS",
   "scripts": {
-    "start": "ts-node server"
+    "dev": "ts-node server/development.ts"
   },
   "author": "untlsn",
   "license": "MIT",
