@@ -8,6 +8,7 @@
   "author": "untlsn",
   "license": "MIT",
   "dependencies": {
+    "directory-tree": "^3.0.1",
     "express": "^4.17.2",
     "solid-app-router": "^0.2.1",
     "ts-node": "^10.4.0",

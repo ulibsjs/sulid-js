@@ -1,6 +1,6 @@
 import * as solid from 'solid-js/web';
 import { createComponent, createMemo, createSignal } from 'solid-js';
-import { routes } from '../hooks/route';
+import { matchParams, routes } from '../hooks/route';
 
 export const [activePage, setActivePage] = createSignal<{ Page: any, props: any }>({} as any)
 
@@ -16,7 +16,9 @@ const hydrate = async () => {
   if (dispose) dispose();
 
   let activeRoute = routes.find(
-    (route) => route.path === window.location.pathname
+    (route) => RegExp(
+      route.path.replace(matchParams, '(.+)')
+    ).test(window.location.pathname)
   )!;
 
   let { default: component } = await activeRoute.getComponent();

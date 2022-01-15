@@ -1,5 +1,7 @@
-interface PageContext {}
+export interface PageContext {
+  params: Record<string, string>
+}
 
-type GetServerSideProps<Props> = (pageContext: PageContext) => Props;
+type GetServerSideProps<Props=object> = (pageContext: PageContext) => Props;
 
 export default GetServerSideProps;
