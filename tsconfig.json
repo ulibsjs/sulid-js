@@ -10,7 +10,8 @@
     "jsxImportSource": "solid-js",
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "resolveJsonModule": true
   },
   "ts-node": {
     "transpileOnly": true,

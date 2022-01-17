@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "description": "Solid-js ssr framework similar to NextJS",
   "scripts": {
-    "dev": "ts-node server/development.ts"
+    "dev": "ts-node server/development.ts",
+    "build": "ts-node server/build.ts",
+    "preview": "node dist/server/index.js",
+    "build:dev": "ts-node server/build.ts && node dist/server/index.js"
   },
   "author": "untlsn",
   "license": "MIT",
@@ -13,8 +16,7 @@
     "solid-app-router": "^0.2.1",
     "ts-node": "^10.4.0",
     "vite": "^2.7.12",
-    "vite-plugin-solid": "^2.2.2",
-    "vite-tsconfig-paths": "^3.3.17"
+    "vite-plugin-solid": "^2.2.2"
   },
   "peerDependencies": {
     "solid-js": "^1.3.3"

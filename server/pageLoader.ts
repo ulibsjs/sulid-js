@@ -1,5 +1,5 @@
 import { template as coreTemplate } from './template';
-import { viteServer } from './development';
+import { viteServer } from './globalData';
 
 interface PageLoaderRes {
   template: string,
