@@ -1,1 +1,0 @@
-export const urlToFilePath = (url: string) => url.at(-1) === '/' ? `${url}index.tsx` : `${url}.tsx`;

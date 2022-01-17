@@ -3,10 +3,11 @@
   "version": "0.0.1",
   "description": "Solid-js ssr framework similar to NextJS",
   "scripts": {
-    "dev": "ts-node server/development.ts",
-    "build": "ts-node server/build.ts",
-    "preview": "node dist/server/index.js",
-    "build:dev": "ts-node server/build.ts && node dist/server/index.js"
+    "dev": "ts-node server/index.ts",
+    "start": "ts-node server/index.ts prod",
+    "build:client": "vite build --outDir dist/client",
+    "build:server": "vite build --outDir dist/server --ssr server/entry.tsx",
+    "build": "npm run build:client && npm run build:server"
   },
   "author": "untlsn",
   "license": "MIT",
